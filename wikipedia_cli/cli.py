@@ -7,4 +7,23 @@ import wikipedia
               help='Wikipedia article to search')
 def main(query):
     """Search wikipedia articles on your terminal"""
-    print wikipedia.search(query)
+    results =  wikipedia.search(query, results=10)
+
+    if not results:
+        print 'No results found'
+        return
+
+    for idx, val in enumerate(results):
+        print "%d. %s" % (idx + 1, val)
+    print "\n-1 to exit"
+
+    total_results = len(results)
+    choice = 0
+    while not (1 <= choice <= total_results) and choice != -1:
+        try:
+            choice = int(raw_input("Choose from the above results: "))
+        except ValueError:
+            continue
+
+    if choice == -1:
+        return
