@@ -5,7 +5,9 @@ import wikipedia
 @click.command()
 @click.option('--query', '-q', prompt='Search',
               help='Wikipedia article to search')
-def main(query):
+@click.option('--log-filename', default='wikipedia_cli.log',
+              help='Path to log file to log queries')
+def main(query, log_filename):
     """Search wikipedia articles on your terminal"""
     results =  wikipedia.search(query, results=10)
 
@@ -27,3 +29,7 @@ def main(query):
 
     if choice == -1:
         return
+
+    page = wikipedia.page(results[choice - 1])
+    with open(log_filename, "a") as log_file:
+        log_file.write(page.url)
