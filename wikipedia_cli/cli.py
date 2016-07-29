@@ -1,5 +1,7 @@
 import click
 import wikipedia
+import codecs
+import os
 
 
 @click.command()
@@ -31,5 +33,8 @@ def main(query, log_filename):
         return
 
     page = wikipedia.page(results[choice - 1])
+    pipe = os.popen('less', 'w')
+    pipe.write(codecs.encode(page.content, 'utf-8'))
+    pipe.close()
     with open(log_filename, "a") as log_file:
         log_file.write(page.url)
