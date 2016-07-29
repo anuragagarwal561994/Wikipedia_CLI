@@ -3,7 +3,7 @@ Search on wikipedia on your terminal
 """
 from setuptools import find_packages, setup
 
-dependencies = ['click']
+dependencies = ['click', 'wikipedia']
 
 setup(
     name='wikipedia-cli',
