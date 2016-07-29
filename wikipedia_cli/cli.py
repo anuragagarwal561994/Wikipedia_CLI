@@ -1,10 +1,10 @@
 import click
+import wikipedia
 
 
 @click.command()
-@click.option('--as-cowboy', '-c', is_flag=True, help='Greet as a cowboy.')
-@click.argument('name', default='world', required=False)
-def main(name, as_cowboy):
+@click.option('--query', '-q', prompt='Search',
+              help='Wikipedia article to search')
+def main(query):
     """Search wikipedia articles on your terminal"""
-    greet = 'Howdy' if as_cowboy else 'Hello'
-    click.echo('{0}, {1}.'.format(greet, name))
+    print wikipedia.search(query)
